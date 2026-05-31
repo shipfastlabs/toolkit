@@ -10,15 +10,16 @@
 </p>
 
 
-# shipfastlabs/toolkit
+# Toolkit
 
 Reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai). The tools are developed in one monorepo
 and split into a separate, installable package for each tool.
 
 > Requires PHP 8.4+ and `laravel/ai`.
 
-Usage and per-tool docs: **[toolkit.shipfastlabs.com](https://toolkit.shipfastlabs.com)**. This README is for
-maintaining the repo.
+Usage and per-tool docs: **[toolkit.shipfastlabs.com](https://toolkit.shipfastlabs.com)**.
+
+This README is for maintaining the repo.
 
 ## Layout
 
