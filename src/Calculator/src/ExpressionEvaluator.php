@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shipfastlabs\Toolkit\Calculator;
 
 use InvalidArgumentException;
+use LogicException;
 
 class ExpressionEvaluator
 {
@@ -212,9 +213,7 @@ class ExpressionEvaluator
      */
     private function consume(): array
     {
-        $token = $this->peek();
-
-        assert($token !== null);
+        $token = $this->peek() ?? throw new LogicException('consume() called with no remaining tokens.');
 
         $this->position++;
 
