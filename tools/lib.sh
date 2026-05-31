@@ -24,7 +24,10 @@ require_gh() {
         exit 1
     fi
 
-   w
+    if ! gh auth status >/dev/null 2>&1; then
+        echo "::error::gh CLI is not authenticated. Run 'gh auth login' or set GH_TOKEN." >&2
+        exit 1
+    fi
 }
 
 # Resolve the mirror repo name for a folder, honouring split-overrides.json.
