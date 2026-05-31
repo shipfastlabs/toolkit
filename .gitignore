@@ -9,5 +9,4 @@
 *.swp
 *.swo
 .deepsec/
-docs/.vitepress/
 docs/node_modules/

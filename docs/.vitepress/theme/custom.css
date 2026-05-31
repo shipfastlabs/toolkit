@@ -1,0 +1,96 @@
+/**
+ * shipfastlabs/toolkit docs theme
+ * Dark, terminal-flavoured palette with a lime accent and Geist / JetBrains Mono.
+ */
+
+:root {
+  --vp-font-family-base: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Lime brand */
+  --vp-c-brand-1: #b4fc6f;
+  --vp-c-brand-2: #c6ff8c;
+  --vp-c-brand-3: #9be84f;
+  --vp-c-brand-soft: rgba(180, 252, 111, 0.12);
+
+  /* Brand button: lime fill, near-black text */
+  --vp-button-brand-bg: #b4fc6f;
+  --vp-button-brand-text: #08090c;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-bg: #c6ff8c;
+  --vp-button-brand-hover-text: #000;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-bg: #9be84f;
+  --vp-button-brand-active-text: #000;
+
+  /* Inline code uses the accent */
+  --vp-code-color: #b4fc6f;
+}
+
+/* Dark is the design — these drive the whole site. */
+.dark {
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: #08090c;
+  --vp-c-bg-soft: #10141a;
+  --vp-c-bg-elv: #10141a;
+
+  --vp-c-text-1: #f4f7f8;
+  --vp-c-text-2: #9ca3af;
+  --vp-c-text-3: #6b7280;
+
+  --vp-c-divider: #33373e;
+  --vp-c-border: #33373e;
+  --vp-c-gutter: #000000;
+
+  --vp-c-brand-1: #b4fc6f;
+  --vp-c-brand-2: #c6ff8c;
+  --vp-c-brand-3: #9be84f;
+  --vp-c-brand-soft: rgba(180, 252, 111, 0.12);
+
+  --vp-code-color: #b4fc6f;
+  --vp-code-bg: rgba(180, 252, 111, 0.1);
+
+  /* Home hero */
+  --vp-home-hero-name-color: #b4fc6f;
+}
+
+/* Headings: tighter, Geist 600 like the reference. */
+.vp-doc h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 2.25rem;
+}
+
+.vp-doc h2 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Inline code: accent on a faint lime tint. */
+.vp-doc :not(pre) > code {
+  color: #b4fc6f;
+  background-color: rgba(180, 252, 111, 0.1);
+  border-radius: 5px;
+  font-size: 0.85em;
+}
+
+/* Sidebar section labels: monospace, muted — the terminal feel. */
+.VPSidebarItem.level-0 > .item > .text {
+  font-family: var(--vp-font-family-mono);
+  letter-spacing: 0.01em;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-3);
+}
+
+/* Brand logo wordmark in the nav. */
+.VPNavBarTitle .title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Muted body copy; headings stay bright. */
+.vp-doc p,
+.vp-doc li {
+  color: var(--vp-c-text-2);
+}
