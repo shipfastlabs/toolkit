@@ -5,13 +5,11 @@
     </p>
 </p>
 
-------
 
 # shipfastlabs/toolkit
 
 Reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai). One monorepo, developed together, that
-subtree-splits into one tiny installable package per tool. A tool is a class implementing
-`Laravel\Ai\Contracts\Tool` (`description()`, `schema()`, `handle()`).
+subtree-splits into one tiny installable package per tool.
 
 > Requires PHP 8.4+ and `laravel/ai`.
 
@@ -26,7 +24,7 @@ shipfastlabs/toolkit          ← dev monorepo (not installed directly)
 ├── tools/                    → publish scripts (split, release, mirrors, docs)
 └── src/
     ├── Calculator/           → splits to shipfastlabs/toolkit-calculator
-    └── Database/             → splits to shipfastlabs/toolkit-database
+    └── */                    → splits to shipfastlabs/toolkit-*
 ```
 
 Each `src/<Tool>/` is split into its own **read-only mirror** repo and published to Packagist, requiring only
@@ -44,12 +42,17 @@ same on push/PR.
 
 ## Releasing
 
-Publishing runs **locally** — no CI secrets, no Actions to babysit. Each tool is versioned independently, and only
+Publishing runs **locally**: no CI secrets, no Actions to babysit. Each tool is versioned independently, and only
 tools changed in the current commit are released.
 
-**One-time setup:** `gh auth login` (scope `repo`); `brew install splitsh-lite`; `jq`, `git`, `bun`; create the
-labels `new-tool`, `release:patch|minor|major`; Settings → Pages → Source = "GitHub Actions". Optional Packagist
-auto-register: export `PACKAGIST_USERNAME` / `PACKAGIST_TOKEN` and install the Packagist GitHub app.
+**One-time setup:**
+
+- [ ] `gh auth login` (scope `repo`)
+- [ ] `brew install splitsh-lite`
+- [ ] `jq`, `git`, `bun` installed
+- [ ] create the labels `new-tool`, `release:patch`, `release:minor`, `release:major`
+- [ ] Settings → Pages → Source = "GitHub Actions"
+- [ ] optional Packagist auto-register: export `PACKAGIST_USERNAME` / `PACKAGIST_TOKEN` and install the Packagist GitHub app
 
 ### Add a tool
 
@@ -71,10 +74,10 @@ After merging, on an up-to-date `main` (HEAD is the merge commit carrying the `r
 composer publish    # = mirrors:create → split → release
 ```
 
-- `mirrors:create` — creates `toolkit-<tool>` for any new tool (skips existing). For a new mirror, also uncheck
+- `mirrors:create`: creates `toolkit-<tool>` for any new tool (skips existing). For a new mirror, also uncheck
   Settings → Features → **Pull requests** once (no API for it; the script reminds you).
-- `split` — `splitsh-lite` splits each tool folder and force-pushes it to its mirror, history intact.
-- `release` — for each tool changed in HEAD, bumps the mirror's latest tag per the label and cuts a GitHub Release;
+- `split`: `splitsh-lite` splits each tool folder and force-pushes it to its mirror, history intact.
+- `release`: for each tool changed in HEAD, bumps the mirror's latest tag per the label and cuts a GitHub Release;
   Packagist ships it from the tag.
 
 Run them one at a time if you need to stop between steps. Docs deploy on their own: pushing to `main` triggers
@@ -93,9 +96,9 @@ No label defaults to `patch`; a tool with no existing tag is released as `1.0.0`
 
 ### Good to know
 
-- **Rerun-safe:** `release` stamps each release with the source commit and skips tools already released for it — run
-  it twice, no double bump. Release an older commit with `GITHUB_SHA=<sha> composer release`.
-- **No `version` field** in tool packages — versions are git tags on the mirrors. The root pins a static `version`
+- **Rerun-safe:** `release` stamps each release with the source commit and skips tools already released for it, so
+  running it twice never double-bumps. Release an older commit with `GITHUB_SHA=<sha> composer release`.
+- **No `version` field** in tool packages: versions are git tags on the mirrors. The root pins a static `version`
   only to silence Composer's notice; the root is never published.
 - **Docs base path:** for `shipfastlabs.github.io/toolkit/` set `base: '/toolkit/'` in
   `docs/.vitepress/config.mts`; for a custom domain leave it and add a `CNAME`.
