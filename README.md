@@ -1,4 +1,8 @@
 <p align="center">
+    <img src="docs/public/og.png" alt="shipfastlabs/toolkit" width="100%">
+</p>
+
+<p align="center">
     <p align="center">
         <a href="https://github.com/shipfastlabs/toolkit/actions"><img alt="GitHub Workflow Status (main)" src="https://github.com/shipfastlabs/toolkit/actions/workflows/tests.yml/badge.svg"></a>
         <a href="https://github.com/shipfastlabs/toolkit"><img alt="License" src="https://img.shields.io/github/license/shipfastlabs/toolkit"></a>
@@ -8,8 +12,8 @@
 
 # shipfastlabs/toolkit
 
-Reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai). One monorepo, developed together, that
-subtree-splits into one tiny installable package per tool.
+Reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai). The tools are developed in one monorepo
+and split into a separate, installable package for each tool.
 
 > Requires PHP 8.4+ and `laravel/ai`.
 
@@ -42,7 +46,7 @@ same on push/PR.
 
 ## Releasing
 
-Publishing runs **locally**: no CI secrets, no Actions to babysit. Each tool is versioned independently, and only
+Publishing runs locally, so there are no CI secrets to manage. Each tool is versioned independently, and only the
 tools changed in the current commit are released.
 
 **One-time setup:**
@@ -79,8 +83,12 @@ composer publish    # = mirrors:create → split → release
 - `release`: for each tool changed in HEAD, bumps the mirror's latest tag per the label and cuts a GitHub Release;
   Packagist ships it from the tag.
 
-Run them one at a time if you need to stop between steps. Docs deploy on their own: pushing to `main` triggers
-`docs.yml` (build VitePress → GitHub Pages); `composer docs:build` builds locally.
+The `release` step only tags the tools changed in HEAD. For the first release, or any time you need to tag
+everything, run `composer release -- --all`. To tag specific tools, run `composer release -- Calculator Database`.
+
+You may run the steps one at a time if you need to stop between them. Docs deploy automatically: pushing to `main`
+triggers `docs.yml`, which builds the VitePress site and publishes it to GitHub Pages. You may build the site
+locally with `composer docs:build`.
 
 ### Version bump
 
@@ -93,7 +101,7 @@ The bump comes from the merged PR's `release:*` label (read off HEAD's PR):
 
 No label defaults to `patch`; a tool with no existing tag is released as `1.0.0`. One commit = one bump type.
 
-### Good to know
+### Notes
 
 - **Rerun-safe:** `release` stamps each release with the source commit and skips tools already released for it, so
   running it twice never double-bumps. Release an older commit with `GITHUB_SHA=<sha> composer release`.
@@ -104,4 +112,4 @@ No label defaults to `patch`; a tool with no existing tag is released as `1.0.0`
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the contributor flow.
 
-By [Shipfastlabs](https://shipfastlabs.com), [MIT licensed](https://opensource.org/licenses/MIT).
+By [Shipfastlabs](https://github.com/shipfastlabs), [MIT licensed](https://opensource.org/licenses/MIT).

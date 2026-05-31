@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) Shipfastlabs <hello@pushpak1300.com>
+Copyright (c) Shipfastlabs <hello@pushpak1300.me>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

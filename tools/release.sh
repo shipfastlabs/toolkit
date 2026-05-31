@@ -41,13 +41,22 @@ if grep -qx "new-tool" <<<"$labels"; then
     is_new=true
 fi
 
-# The tool folders touched by this commit (excludes the stub template).
-mapfile -t changed < <(
-    git diff-tree --no-commit-id --name-only -r "$SHA" \
-        | sed -n 's#^src/\([^/]*\)/.*#\1#p' \
-        | grep -vx stub \
-        | sort -u
-)
+# Which tools to release:
+#   release.sh --all            every tool (use for the first release)
+#   release.sh Calculator Foo   the named tools
+#   release.sh                  only the tools changed in $SHA (default)
+if [[ "${1:-}" == "--all" ]]; then
+    mapfile -t changed < <(tool_folders)
+elif [[ $# -gt 0 ]]; then
+    changed=("$@")
+else
+    mapfile -t changed < <(
+        git diff-tree --no-commit-id --name-only -r "$SHA" \
+            | sed -n 's#^src/\([^/]*\)/.*#\1#p' \
+            | grep -vx stub \
+            | sort -u
+    )
+fi
 
 if [[ ${#changed[@]} -eq 0 ]]; then
     echo "No tool folders changed in ${SHA}; nothing to release."
