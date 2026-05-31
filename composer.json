@@ -28,11 +28,13 @@
         "pestphp/pest-plugin-type-coverage": "^5.0.0",
         "phpstan/phpstan": "^2.1.54",
         "rector/rector": "^2.4.2",
+        "stripe/stripe-php": "^17.0",
         "symfony/var-dumper": "^8.0.8"
     },
     "replace": {
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
+        "shipfastlabs/toolkit-stripe": "self.version",
         "shipfastlabs/toolkit-stub": "self.version"
     },
     "minimum-stability": "dev",
@@ -41,13 +43,15 @@
         "psr-4": {
             "Shipfastlabs\\Toolkit\\": "src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
-            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/"
+            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
+            "Shipfastlabs\\Toolkit\\Stripe\\": "src/Stripe/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
+            "Shipfastlabs\\Toolkit\\Stripe\\Tests\\": "src/Stripe/tests/",
             "Shipfastlabs\\Toolkit\\Tests\\": "tests/"
         }
     },
@@ -73,7 +77,33 @@
         "test": [
             "@test:lint",
             "@test:types",
+            "@test:type-coverage",
             "@test:unit"
+        ],
+        "docgen": "bash tools/docgen.sh",
+        "docs:sync": "bash tools/sync-docs.sh",
+        "docs:build": [
+            "@docs:sync",
+            "cd docs && bun install && bun run docs:build"
+        ],
+        "mirrors:create": "bash tools/create-repos.sh",
+        "mirrors:sync": "bash tools/update-repo-descriptions.sh",
+        "split": "bash tools/split.sh",
+        "release": "bash tools/release.sh",
+        "publish": [
+            "@mirrors:create",
+            "@split",
+            "@release"
         ]
+    },
+    "scripts-descriptions": {
+        "docgen": "Generate per-tool READMEs from the stub (optional tool name arg).",
+        "docs:sync": "Copy each src/<Tool>/README.md into docs/tools/.",
+        "docs:build": "Sync tool docs and build the VitePress site.",
+        "mirrors:create": "Create the mirror repo for any new tool (idempotent).",
+        "mirrors:sync": "Sync mirror descriptions/topics from composer.json.",
+        "split": "Subtree-split changed tools into their mirror repos.",
+        "release": "Tag and release the tools changed in the latest commit.",
+        "publish": "Full release: create mirrors, split, then release."
     }
 }

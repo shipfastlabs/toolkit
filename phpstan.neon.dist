@@ -1,7 +1,7 @@
 parameters:
     level: max
     paths:
-        - src/Calculator/src
-        - src/Database/src
+        # Every tool's source, but not its tests. New tools are picked up automatically.
+        - src/*/src
 
     reportUnmatchedIgnoredErrors: true

@@ -7,10 +7,12 @@
 # script. Folder -> repo name can be overridden in split-overrides.json when the
 # package slug differs from the folder name.
 #
-# Required environment:
-#   MIRROR_TOKEN  PAT with `repo` scope for pushing to the mirrors.
+# Authentication (first one set wins):
+#   MIRROR_TOKEN  PAT with `repo` scope for pushing to the mirrors (CI), or
+#   gh auth       falls back to `gh auth token` for local runs (no PAT needed).
 #
-# Requires: git, splitsh-lite (https://github.com/splitsh/lite), jq.
+# Requires: git, splitsh-lite (https://github.com/splitsh/lite), jq, gh (for the
+#           local token fallback).
 
 set -euo pipefail
 
@@ -24,8 +26,10 @@ if ! command -v splitsh-lite >/dev/null 2>&1; then
     exit 1
 fi
 
-if [[ -z "${MIRROR_TOKEN:-}" ]]; then
-    echo "::error::MIRROR_TOKEN is required for pushing to the mirrors." >&2
+TOKEN="${MIRROR_TOKEN:-$(gh auth token 2>/dev/null || true)}"
+
+if [[ -z "$TOKEN" ]]; then
+    echo "::error::No token for pushing. Set MIRROR_TOKEN or run 'gh auth login'." >&2
     exit 1
 fi
 
@@ -33,7 +37,7 @@ split_folder() {
     local folder="$1"
     local repo
     repo="$(repo_name_for "$folder")"
-    local remote="https://${MIRROR_TOKEN}@github.com/${ORG}/${repo}.git"
+    local remote="https://x-access-token:${TOKEN}@github.com/${ORG}/${repo}.git"
 
     echo "==> Splitting src/${folder} -> ${ORG}/${repo}"
 

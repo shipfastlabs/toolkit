@@ -8,5 +8,5 @@ Tools are added to the [monorepo](https://github.com/shipfastlabs/toolkit), neve
 4. Add the tool's autoload entries to the root `composer.json`, then `composer dump-autoload && composer test` until green (PHPStan max, 100% type + code coverage).
 5. Open a PR. A maintainer applies `new-tool` and/or `release:patch|minor|major`.
 
-On merge, automation creates the mirror repo, splits the folder, tags it and publishes to Packagist. No manual repo
-work. See the full [CONTRIBUTING guide](https://github.com/shipfastlabs/toolkit/blob/main/CONTRIBUTING.md).
+After merge, a maintainer runs `composer publish` locally to create the mirror, split the folder, tag it and publish
+to Packagist. See the full [CONTRIBUTING guide](https://github.com/shipfastlabs/toolkit/blob/main/CONTRIBUTING.md).
