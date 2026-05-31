@@ -1,0 +1,46 @@
+name: Monorepo Split
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    name: Create mirrors and split
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
+        with:
+          php-version: 8.5
+          extensions: dom, mbstring, zip, curl
+
+      - name: Install splitsh-lite
+        run: |
+          curl -sSL https://github.com/splitsh/lite/releases/download/v1.0.1/lite_linux_amd64.tar.gz \
+            | tar -xz
+          sudo mv splitsh-lite /usr/local/bin/splitsh-lite
+
+      - name: Create mirror repositories for any new tools
+        env:
+          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GITHUB_ORG: shipfastlabs
+          PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+        run: php tools/create-repos.php
+
+      - name: Split changed tool folders into their mirrors
+        env:
+          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GITHUB_ORG: shipfastlabs
+        run: bash tools/split.sh

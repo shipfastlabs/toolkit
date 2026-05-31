@@ -1,0 +1,49 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/**/README.md'
+      - 'docs/**'
+      - 'tools/sync-docs.php'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Sync and deploy docs
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
+        with:
+          php-version: 8.5
+
+      - name: Sync tool READMEs into the docs site
+        run: php tools/sync-docs.php
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
+        with:
+          bun-version: latest
+
+      - name: Build the static site
+        working-directory: docs
+        run: |
+          bun install
+          bun run docs:build
+
+      - name: Deploy to Vercel
+        working-directory: docs
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: bunx vercel deploy .vitepress/dist --prod --yes --token "$VERCEL_TOKEN"

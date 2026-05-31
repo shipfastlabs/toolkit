@@ -1,0 +1,3 @@
+{
+    "_comment": "Map a src/<Folder> name to a mirror repo/package slug when the slug differs from the folder. Default slug is toolkit-<lowercase folder>. Example: \"FileSystem\": \"toolkit-filesystem\"."
+}

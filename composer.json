@@ -1,0 +1,81 @@
+{
+    "name": "shipfastlabs/toolkit",
+    "description": "A community package of reusable AI tools for the Laravel AI SDK",
+    "license": "MIT",
+    "version": "1.0.0",
+    "keywords": [
+        "php",
+        "laravel",
+        "ai",
+        "tools",
+        "toolkit"
+    ],
+    "authors": [
+        {
+            "name": "Pushpak Chhajed",
+            "email": "hello@shipfastlabs.com"
+        }
+    ],
+    "require": {
+        "php": "^8.4.0",
+        "laravel/ai": "^0.7"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.29.1",
+        "mrpunyapal/rector-pest": "^0.2.15",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^5.0.0",
+        "pestphp/pest-plugin-type-coverage": "^5.0.0",
+        "phpstan/phpstan": "^2.1.54",
+        "rector/rector": "^2.4.2",
+        "symfony/var-dumper": "^8.0.8"
+    },
+    "replace": {
+        "shipfastlabs/toolkit-calculator": "self.version",
+        "shipfastlabs/toolkit-database": "self.version",
+        "shipfastlabs/toolkit-stub": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\": "src/",
+            "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
+            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
+            "Shipfastlabs\\Toolkit\\Stub\\": "src/stub/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
+            "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
+            "Shipfastlabs\\Toolkit\\Stub\\Tests\\": "src/stub/tests/",
+            "Shipfastlabs\\Toolkit\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "lint": [
+            "pint --parallel",
+            "rector"
+        ],
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:lint": [
+            "pint --parallel --test",
+            "rector --dry-run"
+        ],
+        "test:unit": "pest --coverage --exactly=100",
+        "test:types": "phpstan",
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ]
+    }
+}

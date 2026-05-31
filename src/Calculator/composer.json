@@ -1,0 +1,22 @@
+{
+    "name": "shipfastlabs/toolkit-calculator",
+    "description": "Calculator tool for the Laravel AI SDK",
+    "keywords": ["laravel", "ai", "tool", "calculator", "math"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Calculator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

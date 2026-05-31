@@ -1,0 +1,22 @@
+{
+    "name": "shipfastlabs/toolkit-database",
+    "description": "Read-only database query tool for the Laravel AI SDK",
+    "keywords": ["laravel", "ai", "tool", "database", "sql"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Database\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Database\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

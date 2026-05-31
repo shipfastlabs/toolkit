@@ -1,0 +1,13 @@
+/.phpunit.result.cache
+/.phpunit.cache
+/.php-cs-fixer.cache
+/.php-cs-fixer.php
+/composer.lock
+/phpunit.xml
+/vendor/
+/.idea/
+*.swp
+*.swo
+.deepsec/
+docs/.vitepress/
+docs/node_modules/

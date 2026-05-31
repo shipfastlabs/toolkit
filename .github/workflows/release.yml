@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: ["Monorepo Split"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    name: Tag and release changed tools
+    # Only run when the split that triggered this finished successfully.
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout the split commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
+        with:
+          php-version: 8.5
+          extensions: dom, mbstring, zip, curl
+
+      - name: Release changed tools
+        env:
+          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
+          GITHUB_ORG: shipfastlabs
+          GITHUB_SHA: ${{ github.event.workflow_run.head_sha }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: php tools/release.php

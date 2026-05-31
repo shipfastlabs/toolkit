@@ -1,0 +1,22 @@
+{
+    "name": "shipfastlabs/toolkit-stub",
+    "description": "Template tool for the Laravel AI SDK. Copy this folder to start a new tool",
+    "keywords": ["laravel", "ai", "tool", "stub", "template"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Stub\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Stub\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
