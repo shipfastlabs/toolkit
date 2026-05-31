@@ -38,7 +38,7 @@ Contributions are welcome and accepted via pull requests against the **monorepo*
    - `new-tool` — first release (creates the mirror, tags `1.0.0`).
    - `release:patch` | `release:minor` | `release:major` — the bump for every tool changed in the PR.
 
-On merge to `master`, automation creates the mirror repo, splits the folder (history preserved), tags it and
+On merge to `main`, automation creates the mirror repo, splits the folder (history preserved), tags it and
 publishes the release; the Packagist webhook then ships the version.
 
 ## Authoring conventions (from `laravel/ai`)

@@ -7,7 +7,7 @@ GitHub Pages.
 
 - `guide/`: hand-written framing pages (getting started, contributing).
 - `tools/`: **auto-generated**, do not edit. `tools/sync-docs.sh` copies every
-  `src/<Tool>/README.md` here on each push to `master`. Edit the tool's README instead.
+  `src/<Tool>/README.md` here on each push to `main`. Edit the tool's README instead.
 
 ## Develop & build
 
@@ -18,5 +18,5 @@ bun run docs:build      # static build -> .vitepress/dist (deployed to GitHub Pa
 bun run docs:preview    # preview the production build
 ```
 
-CI on `master` runs `tools/sync-docs.sh` first to refresh `tools/`, then builds and deploys, so adding a tool
+CI on `main` runs `tools/sync-docs.sh` first to refresh `tools/`, then builds and deploys, so adding a tool
 publishes its doc page automatically.

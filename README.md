@@ -1,6 +1,6 @@
 <p align="center">
     <p align="center">
-        <a href="https://github.com/shipfastlabs/toolkit/actions"><img alt="GitHub Workflow Status (master)" src="https://github.com/shipfastlabs/toolkit/actions/workflows/tests.yml/badge.svg"></a>
+        <a href="https://github.com/shipfastlabs/toolkit/actions"><img alt="GitHub Workflow Status (main)" src="https://github.com/shipfastlabs/toolkit/actions/workflows/tests.yml/badge.svg"></a>
         <a href="https://github.com/shipfastlabs/toolkit"><img alt="License" src="https://img.shields.io/github/license/shipfastlabs/toolkit"></a>
     </p>
 </p>
@@ -37,7 +37,7 @@ shipfastlabs/toolkit              ← dev monorepo (this repo, NOT installed dir
 ```
 
 - **Develop** in the monorepo: one `composer install`, one test suite, shared tooling.
-- **Ship** each `src/<Tool>/` as its own read-only Packagist package via a subtree split (automated on merge to `master`).
+- **Ship** each `src/<Tool>/` as its own read-only Packagist package via a subtree split (automated on merge to `main`).
 - Each tool package `require`s only `laravel/ai`; there is no shared core dependency.
 - The split + release machinery lives in [`tools/`](tools/) and [`.github/workflows/`](.github/workflows/).
 
@@ -80,7 +80,7 @@ One PR carries **one** bump type, applied to every tool it touched.
 2. Implement description(), schema(), handle(); generate the README with `tools/docgen.sh <YourTool>`.
 3. Add the tool's autoload entries to the root composer.json, then: composer dump-autoload && composer test  # until green
 4. Open a PR → tests.yml runs on it.
-5. Maintainer adds `new-tool` (+ optionally `release:minor`), then merges to master.
+5. Maintainer adds `new-tool` (+ optionally `release:minor`), then merges to main.
 ```
 
 On merge, automation creates `shipfastlabs/toolkit-<tool>`, splits the folder (history preserved), tags it `1.0.0`
@@ -92,10 +92,10 @@ Identical to above, **minus** `new-tool`. Add `release:patch` (or `minor` / `maj
 tool's mirror gets a new tag; every other package is untouched. Users update with
 `composer update shipfastlabs/toolkit-<tool>`.
 
-### What fires automatically on merge to `master`
+### What fires automatically on merge to `main`
 
 ```
-push:master
+push:main
  ├─ monorepo-split.yml
  │   ├─ create-repos.sh   → detects NEW src/* folders (PR had `new-tool`) → creates the mirror repo,
  │   │                       sets topics/description, registers it on Packagist

@@ -103,5 +103,5 @@ for folder in "${changed[@]}"; do
         -f name="$next" \
         -f body="toolkit-source: ${SHA}" \
         -F generate_release_notes=true \
-        -f target_commitish=master >/dev/null
+        -f target_commitish=main >/dev/null
 done

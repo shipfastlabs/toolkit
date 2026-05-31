@@ -17,14 +17,15 @@ OVERRIDES_FILE="${ROOT}/split-overrides.json"
 PACKAGE_PREFIX="toolkit-"
 
 # Fail early unless the gh CLI is installed and authenticated.
+# Accepts either a stored `gh auth login` session or a GH_TOKEN/GITHUB_TOKEN env var.
 require_gh() {
     if ! command -v gh >/dev/null 2>&1; then
         echo "::error::gh CLI is not installed." >&2
         exit 1
     fi
 
-    if [[ -z "${GH_TOKEN:-}${GITHUB_TOKEN:-}" ]]; then
-        echo "::error::GH_TOKEN (or GITHUB_TOKEN) is required for the gh CLI." >&2
+    if ! gh auth status >/dev/null 2>&1; then
+        echo "::error::gh CLI is not authenticated. Run 'gh auth login' or set GH_TOKEN." >&2
         exit 1
     fi
 }

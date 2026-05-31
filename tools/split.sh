@@ -40,7 +40,7 @@ split_folder() {
     local sha
     sha="$(splitsh-lite --prefix="src/${folder}")"
 
-    git push "$remote" "${sha}:refs/heads/master" --force
+    git push "$remote" "${sha}:refs/heads/main" --force
 }
 
 pids=()

@@ -9,4 +9,4 @@ Tools are added to the [monorepo](https://github.com/shipfastlabs/toolkit), neve
 5. Open a PR. A maintainer applies `new-tool` and/or `release:patch|minor|major`.
 
 On merge, automation creates the mirror repo, splits the folder, tags it and publishes to Packagist. No manual repo
-work. See the full [CONTRIBUTING guide](https://github.com/shipfastlabs/toolkit/blob/master/CONTRIBUTING.md).
+work. See the full [CONTRIBUTING guide](https://github.com/shipfastlabs/toolkit/blob/main/CONTRIBUTING.md).
