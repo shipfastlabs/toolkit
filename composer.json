@@ -41,15 +41,13 @@
         "psr-4": {
             "Shipfastlabs\\Toolkit\\": "src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
-            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
-            "Shipfastlabs\\Toolkit\\Stub\\": "src/stub/src/"
+            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
-            "Shipfastlabs\\Toolkit\\Stub\\Tests\\": "src/stub/tests/",
             "Shipfastlabs\\Toolkit\\Tests\\": "tests/"
         }
     },

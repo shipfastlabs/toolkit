@@ -14,7 +14,7 @@ Contributions are welcome and accepted via pull requests against the **monorepo*
    ```
 2. Copy the template:
    ```bash
-   cp -R src/stub src/YourTool
+   cp -R stub src/YourTool
    ```
 3. In `src/YourTool/`:
    - Rename `StubTool.php` → `YourToolTool.php` and the class to `YourToolTool`.

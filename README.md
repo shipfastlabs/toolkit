@@ -30,8 +30,8 @@ works.
 
 ```
 shipfastlabs/toolkit              ← dev monorepo (this repo, NOT installed directly)
+├── stub/                         → template to copy when adding a tool (NOT under src/, never split)
 └── src/
-    ├── stub/                     → template to copy when adding a tool
     ├── Calculator/               → split → shipfastlabs/toolkit-calculator
     └── Database/                 → split → shipfastlabs/toolkit-database
 ```
@@ -76,7 +76,7 @@ One PR carries **one** bump type, applied to every tool it touched.
 ### Adding a new tool
 
 ```
-1. Copy src/stub/ → src/<YourTool>/; rename the class, namespace and composer.json package.
+1. Copy stub/ → src/<YourTool>/; rename the class, namespace and composer.json package.
 2. Implement description(), schema(), handle(); generate the README with `php tools/docgen.php <YourTool>`.
 3. Add the tool's autoload entries to the root composer.json, then: composer dump-autoload && composer test  # until green
 4. Open a PR → tests.yml runs on it.

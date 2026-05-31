@@ -3,6 +3,5 @@ parameters:
     paths:
         - src/Calculator/src
         - src/Database/src
-        - src/stub/src
 
     reportUnmatchedIgnoredErrors: true

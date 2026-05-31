@@ -7,7 +7,6 @@
         <include>
             <directory suffix=".php">./src/Calculator/src</directory>
             <directory suffix=".php">./src/Database/src</directory>
-            <directory suffix=".php">./src/stub/src</directory>
         </include>
     </source>
     <testsuites>
