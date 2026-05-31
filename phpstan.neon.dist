@@ -1,7 +1,11 @@
 parameters:
     level: max
+    # Analyse every tool's source but not its tests. New tools are picked up
+    # automatically; PHPStan does not glob `paths`, so we scan src/ and exclude
+    # the test folders (excludePaths does support `*`).
     paths:
-        # Every tool's source, but not its tests. New tools are picked up automatically.
-        - src/*/src
+        - src
+    excludePaths:
+        - src/*/tests/*
 
     reportUnmatchedIgnoredErrors: true

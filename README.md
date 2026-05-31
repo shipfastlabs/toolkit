@@ -48,7 +48,6 @@ tools changed in the current commit are released.
 **One-time setup:**
 
 - [ ] `gh auth login` (scope `repo`)
-- [ ] `brew install splitsh-lite`
 - [ ] `jq`, `git`, `bun` installed
 - [ ] create the labels `new-tool`, `release:patch`, `release:minor`, `release:major`
 - [ ] Settings → Pages → Source = "GitHub Actions"
@@ -76,7 +75,7 @@ composer publish    # = mirrors:create → split → release
 
 - `mirrors:create`: creates `toolkit-<tool>` for any new tool (skips existing). For a new mirror, also uncheck
   Settings → Features → **Pull requests** once (no API for it; the script reminds you).
-- `split`: `splitsh-lite` splits each tool folder and force-pushes it to its mirror, history intact.
+- `split`: `git subtree split` extracts each tool folder (history intact) and force-pushes it to its mirror.
 - `release`: for each tool changed in HEAD, bumps the mirror's latest tag per the label and cuts a GitHub Release;
   Packagist ships it from the tag.
 

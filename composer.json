@@ -28,13 +28,11 @@
         "pestphp/pest-plugin-type-coverage": "^5.0.0",
         "phpstan/phpstan": "^2.1.54",
         "rector/rector": "^2.4.2",
-        "stripe/stripe-php": "^17.0",
         "symfony/var-dumper": "^8.0.8"
     },
     "replace": {
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
-        "shipfastlabs/toolkit-stripe": "self.version",
         "shipfastlabs/toolkit-stub": "self.version"
     },
     "minimum-stability": "dev",
@@ -43,15 +41,13 @@
         "psr-4": {
             "Shipfastlabs\\Toolkit\\": "src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
-            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
-            "Shipfastlabs\\Toolkit\\Stripe\\": "src/Stripe/src/"
+            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
-            "Shipfastlabs\\Toolkit\\Stripe\\Tests\\": "src/Stripe/tests/",
             "Shipfastlabs\\Toolkit\\Tests\\": "tests/"
         }
     },
