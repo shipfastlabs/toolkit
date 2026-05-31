@@ -12,12 +12,12 @@ composer require shipfastlabs/toolkit-database
 
 ## Usage
 
-Add the tool to an agent's `tools()`:
+Instantiate the tool and pass it to an agent's `tools()`:
 
 ```php
-use Shipfastlabs\Toolkit\Database\DatabaseTool;
+use Shipfastlabs\Toolkit\Database\DatabaseQueryTool;
 
-$tools = [new DatabaseTool];
+$tools = [new DatabaseQueryTool];
 ```
 
 ## Input schema

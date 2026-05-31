@@ -17,7 +17,7 @@ composer require shipfastlabs/toolkit-calculator
 
 ## Usage
 
-Add the tool to an agent's `tools()`:
+Instantiate the tool and pass it to an agent's `tools()`:
 
 ```php
 use Shipfastlabs\Toolkit\Calculator\CalculatorTool;
@@ -39,4 +39,4 @@ None. The calculator is pure and ships no config or service provider.
 
 ## Safety
 
-The expression is parsed by a small recursive-descent evaluator; PHP's `eval()` is **never** used. Invalid input, division/modulo by zero and non-finite results are returned to the model as plain strings rather than thrown, so the model can recover.
+The expression is parsed by a small recursive-descent evaluator; PHP's `eval()` is never used. Invalid input, division or modulo by zero, and non-finite results are returned to the model as plain strings rather than thrown, so the model can recover.

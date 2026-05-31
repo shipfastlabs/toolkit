@@ -72,7 +72,7 @@ composer require ${package}
 
 ## Usage
 
-Add the tool to an agent's \`tools()\`:
+Instantiate the tool and pass it to an agent's \`tools()\`:
 
 \`\`\`php
 use ${class};

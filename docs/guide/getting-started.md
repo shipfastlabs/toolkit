@@ -1,9 +1,9 @@
 # Getting Started
 
-A community catalog of reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai): one development
-monorepo that subtree-splits into many tiny, independently-installable packages.
+The toolkit is a community catalog of reusable AI tools for the [Laravel AI SDK](https://github.com/laravel/ai). The
+tools are developed in one monorepo and split into small, independently installable packages.
 
-A **tool** is a small class implementing `Laravel\Ai\Contracts\Tool`:
+A tool is a class implementing `Laravel\Ai\Contracts\Tool`:
 
 ```php
 interface Tool
