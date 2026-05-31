@@ -7,7 +7,7 @@
 
 Part of the [shipfastlabs/toolkit](https://github.com/shipfastlabs/toolkit) catalog of reusable AI tools for the Laravel AI SDK.
 
-<!-- AUTO-GENERATED: do not edit above this line. Run `php tools/docgen.php`. -->
+<!-- AUTO-GENERATED: do not edit above this line. Run `tools/docgen.sh`. -->
 
 ## Installation
 

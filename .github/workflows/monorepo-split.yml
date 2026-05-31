@@ -19,28 +19,27 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
-        with:
-          php-version: 8.5
-          extensions: dom, mbstring, zip, curl
-
       - name: Install splitsh-lite
+        env:
+          SPLITSH_VERSION: v1.0.1
+          SPLITSH_SHA256: 2539301ce5e21d0ca44b689d0dd2c1b20d9f9e996c1fe6c462afb8af4e7141cc
         run: |
-          curl -sSL https://github.com/splitsh/lite/releases/download/v1.0.1/lite_linux_amd64.tar.gz \
-            | tar -xz
+          set -euo pipefail
+          curl -sSL "https://github.com/splitsh/lite/releases/download/${SPLITSH_VERSION}/lite_linux_amd64.tar.gz" \
+            -o splitsh-lite.tar.gz
+          echo "${SPLITSH_SHA256}  splitsh-lite.tar.gz" | sha256sum --check --strict
+          tar -xzf splitsh-lite.tar.gz
           sudo mv splitsh-lite /usr/local/bin/splitsh-lite
+          rm splitsh-lite.tar.gz
 
       - name: Create mirror repositories for any new tools
         env:
-          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
-          GITHUB_ORG: shipfastlabs
+          GH_TOKEN: ${{ secrets.MIRROR_TOKEN }}
           PACKAGIST_USERNAME: ${{ secrets.PACKAGIST_USERNAME }}
           PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
-        run: php tools/create-repos.php
+        run: bash tools/create-repos.sh
 
       - name: Split changed tool folders into their mirrors
         env:
-          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
-          GITHUB_ORG: shipfastlabs
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: bash tools/split.sh

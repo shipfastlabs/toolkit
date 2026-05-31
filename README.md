@@ -77,7 +77,7 @@ One PR carries **one** bump type, applied to every tool it touched.
 
 ```
 1. Copy stub/ → src/<YourTool>/; rename the class, namespace and composer.json package.
-2. Implement description(), schema(), handle(); generate the README with `php tools/docgen.php <YourTool>`.
+2. Implement description(), schema(), handle(); generate the README with `tools/docgen.sh <YourTool>`.
 3. Add the tool's autoload entries to the root composer.json, then: composer dump-autoload && composer test  # until green
 4. Open a PR → tests.yml runs on it.
 5. Maintainer adds `new-tool` (+ optionally `release:minor`), then merges to master.
@@ -97,21 +97,21 @@ tool's mirror gets a new tag; every other package is untouched. Users update wit
 ```
 push:master
  ├─ monorepo-split.yml
- │   ├─ create-repos.php  → detects NEW src/* folders (PR had `new-tool`) → creates the mirror repo,
+ │   ├─ create-repos.sh   → detects NEW src/* folders (PR had `new-tool`) → creates the mirror repo,
  │   │                       sets topics/description, registers it on Packagist
  │   └─ split.sh          → splitsh-lite splits every CHANGED src/<Tool>/ → force-pushes to its mirror
  │
  ├─ release.yml  (after split succeeds)
- │   └─ release.php       → reads the PR's `release:*` label, diff-trees the changed folders, reads each
+ │   └─ release.sh        → reads the PR's `release:*` label, diff-trees the changed folders, reads each
  │                          mirror's latest tag, bumps it (or 1.0.0 for `new-tool`), publishes a GitHub Release
  │                          → the Packagist webhook on the mirror sees the tag and ships the version
  │
- └─ docs.yml              → sync-docs.php refreshes docs/tools/ → builds & deploys the docs site
+ └─ docs.yml              → sync-docs.sh refreshes docs/tools/ → builds & deploys the docs site
 ```
 
 ### Invariants that keep it sane at 100+ packages
 
-- **No `version` field in the tool packages** — their versions are git tags on the mirrors; `release.php` reads and bumps them. (The dev-only monorepo root pins a static `version` purely to silence Composer's root-version notice; it is never published.)
+- **No `version` field in the tool packages** — their versions are git tags on the mirrors; `release.sh` reads and bumps them. (The dev-only monorepo root pins a static `version` purely to silence Composer's root-version notice; it is never published.)
 - **Mirrors are read-only** — never commit or tag them by hand; everything flows from the monorepo.
 - **Changed-only** — `git diff-tree` guarantees untouched tools never re-release.
 - **You manage exactly one repo** — adding or releasing N tools never means touching N repos.

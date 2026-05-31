@@ -7,27 +7,26 @@ on:
     paths:
       - 'src/**/README.md'
       - 'docs/**'
-      - 'tools/sync-docs.php'
+      - 'tools/sync-docs.sh'
 
-permissions:
-  contents: read
+# Allow only one concurrent deployment.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    name: Sync and deploy docs
+    name: Sync and build docs
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
-        with:
-          php-version: 8.5
-
       - name: Sync tool READMEs into the docs site
-        run: php tools/sync-docs.php
+        run: bash tools/sync-docs.sh
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
@@ -40,10 +39,23 @@ jobs:
           bun install
           bun run docs:build
 
-      - name: Deploy to Vercel
-        working-directory: docs
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: bunx vercel deploy .vitepress/dist --prod --yes --token "$VERCEL_TOKEN"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+        with:
+          path: docs/.vitepress/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy to GitHub Pages
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

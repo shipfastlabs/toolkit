@@ -3,8 +3,8 @@
 Contributions are welcome and accepted via pull requests against the **monorepo**
 ([`shipfastlabs/toolkit`](https://github.com/shipfastlabs/toolkit)).
 
-> The per-tool packages (`shipfastlabs/toolkit-*`) are **read-only mirrors**. Never open a PR or push a tag against
-> them — everything flows from this monorepo. PRs opened on a mirror are auto-closed with a redirect here.
+> The per-tool packages (`shipfastlabs/toolkit-*`) are **read-only mirrors** with issues and pull requests disabled.
+> Never push a tag against them — everything flows from this monorepo. Open all contributions here instead.
 
 ## Adding a tool
 
@@ -25,7 +25,7 @@ Contributions are welcome and accepted via pull requests against the **monorepo*
      README for the user to add to their `config/ai.php` manually — tools do **not** ship config files or providers.
 4. Generate the README scaffold and fill in the tool-specific sections:
    ```bash
-   php tools/docgen.php YourTool
+   tools/docgen.sh YourTool
    ```
 5. Make the root autoloader aware of the new package, then run the full suite. Add the package's namespace to
    the root `composer.json` (`Shipfastlabs\Toolkit\YourTool\` → `src/YourTool/src/` under `autoload`, and the

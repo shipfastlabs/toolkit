@@ -23,16 +23,9 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.event.workflow_run.head_sha }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
-        with:
-          php-version: 8.5
-          extensions: dom, mbstring, zip, curl
-
       - name: Release changed tools
         env:
-          GITHUB_PUSH_TOKEN: ${{ secrets.GITHUB_PUSH_TOKEN }}
-          GITHUB_ORG: shipfastlabs
+          GH_TOKEN: ${{ secrets.MIRROR_TOKEN }}
           GITHUB_SHA: ${{ github.event.workflow_run.head_sha }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: php tools/release.php
+        run: bash tools/release.sh
