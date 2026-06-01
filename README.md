@@ -13,6 +13,17 @@ Toolkit is a community catalog of reusable AI tools for the [Laravel AI SDK](htt
 
 > Requires PHP 8.4+ and `laravel/ai`.
 
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `CalculatorTool` | Evaluate mathematical expressions with perfect accuracy. Supports `+`, `-`, `*`, `/`, `%`, `^`, parentheses, and decimals. |
+| `DatabaseQueryTool` | Run read-only `SELECT` queries against your Laravel database and return results as JSON. |
+| `TavilySearch` | Search the web for real-time information using [Tavily](https://tavily.com). |
+| `TavilyExtract` | Extract clean, structured content from URLs. |
+| `TavilyCrawl` | Intelligently crawl a website and extract content. |
+| `TavilyMap` | Discover and map a website's structure. |
+
 ## Official Documentation
 
 Documentation for Toolkit can be found on the [documentation site](https://toolkit.shipfastlabs.com).

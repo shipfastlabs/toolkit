@@ -33,7 +33,8 @@
     "replace": {
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
-        "shipfastlabs/toolkit-stub": "self.version"
+        "shipfastlabs/toolkit-stub": "self.version",
+        "shipfastlabs/toolkit-tavily": "self.version"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -41,14 +42,19 @@
         "psr-4": {
             "Shipfastlabs\\Toolkit\\": "src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
-            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/"
+            "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
+            "Shipfastlabs\\Toolkit\\Tavily\\": "src/Tavily/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
-            "Shipfastlabs\\Toolkit\\Tests\\": "tests/"
+            "Shipfastlabs\\Toolkit\\Tavily\\Tests\\": "src/Tavily/tests/",
+            "Shipfastlabs\\Toolkit\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "config": {
@@ -90,6 +96,18 @@
             "@mirrors:create",
             "@split",
             "@release"
+        ],
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
         ]
     },
     "scripts-descriptions": {
