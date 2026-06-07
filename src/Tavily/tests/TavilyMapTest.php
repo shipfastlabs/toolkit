@@ -9,7 +9,7 @@ use Laravel\Ai\Tools\Request;
 use Shipfastlabs\Toolkit\Tavily\TavilyMap;
 
 it('has a description', function (): void {
-    expect((new TavilyMap)->description())->toContain('Tavily Map');
+    expect((new TavilyMap)->description())->toContain('Map the structure of a website');
 });
 
 it('is marked as strict', function (): void {

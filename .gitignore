@@ -6,6 +6,8 @@
 /phpunit.xml
 /vendor/
 /.idea/
+/.env
+/workbench/database/*.sqlite
 *.swp
 *.swo
 .deepsec/

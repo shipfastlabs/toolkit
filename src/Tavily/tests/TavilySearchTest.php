@@ -9,7 +9,7 @@ use Laravel\Ai\Tools\Request;
 use Shipfastlabs\Toolkit\Tavily\TavilySearch;
 
 it('has a description', function (): void {
-    expect((new TavilySearch)->description())->toContain('Tavily Search');
+    expect((new TavilySearch)->description())->toContain('Search the web');
 });
 
 it('is marked as strict', function (): void {

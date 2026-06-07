@@ -16,12 +16,9 @@ class TavilyMap implements Tool
 {
     public function description(): string
     {
-        return <<<'TXT'
-            Tavily Map - Website structure discovery and mapping.
-            Traverse a website like a graph to discover all pages and return
-            the list of URLs as JSON. Use this to understand a site's structure,
-            e.g. "map https://docs.laravel.com".
-            TXT;
+        return 'Map the structure of a website starting from a base URL. Discovers '
+            .'pages, links, and site hierarchy without extracting full content. '
+            .'Ideal for understanding site architecture.';
     }
 
     public function schema(JsonSchema $schema): array
@@ -29,28 +26,33 @@ class TavilyMap implements Tool
         return [
             'url' => $schema
                 ->string()
-                ->description('The root URL to begin the mapping from.')
+                ->description('The base URL to start mapping from')
                 ->required(),
             'instructions' => $schema
                 ->string()
-                ->description('Optional natural language instructions for the crawler.')
-                ->nullable(),
+                ->description("Optional instructions to guide the mapping (e.g., 'focus on documentation pages', 'skip API references')")
+                ->nullable()
+                ->required(),
             'max_depth' => $schema
                 ->integer()
-                ->description('Maximum map depth (1-5). Defaults to 1.')
-                ->nullable(),
+                ->description('Maximum depth to map (number of link hops from the base URL, 1-5, default: 1)')
+                ->nullable()
+                ->required(),
             'max_breadth' => $schema
                 ->integer()
-                ->description('Maximum links to follow per page (1-500). Defaults to 20.')
-                ->nullable(),
+                ->description('Maximum number of links to follow per page (1-500, default: 20)')
+                ->nullable()
+                ->required(),
             'limit' => $schema
                 ->integer()
-                ->description('Total number of links to process before stopping. Defaults to 50.')
-                ->nullable(),
+                ->description('Total number of links to process before stopping (default: 50)')
+                ->nullable()
+                ->required(),
             'allow_external' => $schema
                 ->boolean()
-                ->description('Whether to include external domain links. Defaults to true.')
-                ->nullable(),
+                ->description('Whether to allow mapping external domains (default: false)')
+                ->nullable()
+                ->required(),
         ];
     }
 

@@ -16,12 +16,9 @@ class TavilyExtract implements Tool
 {
     public function description(): string
     {
-        return <<<'TXT'
-            Tavily Extract - Clean, structured content extraction from URLs.
-            Extract web page content from one or more URLs and return it as JSON.
-            Use this to read the full content of a webpage, e.g. "extract the content
-            from https://example.com/article".
-            TXT;
+        return 'Extract clean, structured content from one or more URLs. Returns '
+            .'parsed content in markdown or text format, optimized for AI '
+            .'consumption.';
     }
 
     public function schema(JsonSchema $schema): array
@@ -29,24 +26,28 @@ class TavilyExtract implements Tool
         return [
             'urls' => $schema
                 ->string()
-                ->description('A single URL or comma-separated URLs to extract content from.')
+                ->description('A single URL or comma-separated list of URLs to extract content from')
                 ->required(),
             'query' => $schema
                 ->string()
-                ->description('Optional query to rerank extracted chunks by relevance.')
-                ->nullable(),
+                ->description('User intent query for reranking extracted content chunks')
+                ->nullable()
+                ->required(),
             'extract_depth' => $schema
                 ->string()
-                ->description('Extraction depth: "basic" or "advanced". Defaults to "basic".')
-                ->nullable(),
+                ->description("Extraction depth - 'basic' for main content, 'advanced' for comprehensive extraction (default: 'basic')")
+                ->nullable()
+                ->required(),
             'format' => $schema
                 ->string()
-                ->description('Output format: "markdown" or "text". Defaults to "markdown".')
-                ->nullable(),
+                ->description("Output format for the extracted content - 'markdown' or 'text' (default: 'markdown')")
+                ->nullable()
+                ->required(),
             'include_images' => $schema
                 ->boolean()
-                ->description('Whether to include a list of images extracted from the URLs. Defaults to false.')
-                ->nullable(),
+                ->description('Whether to include a list of images extracted from the URLs (default: false)')
+                ->nullable()
+                ->required(),
         ];
     }
 

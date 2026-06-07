@@ -38,10 +38,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tavily', function () {
-    return view('tavily');
-});
-
 Route::get('/tavily/search', function () {
     $query = request('query', 'Laravel AI SDK');
     $tool = new TavilySearch;

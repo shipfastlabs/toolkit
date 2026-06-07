@@ -9,7 +9,7 @@ use Laravel\Ai\Tools\Request;
 use Shipfastlabs\Toolkit\Tavily\TavilyExtract;
 
 it('has a description', function (): void {
-    expect((new TavilyExtract)->description())->toContain('Tavily Extract');
+    expect((new TavilyExtract)->description())->toContain('Extract clean, structured content');
 });
 
 it('is marked as strict', function (): void {

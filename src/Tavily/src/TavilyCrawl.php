@@ -16,12 +16,9 @@ class TavilyCrawl implements Tool
 {
     public function description(): string
     {
-        return <<<'TXT'
-            Tavily Crawl - Intelligent website crawling at scale.
-            Crawl a website starting from a root URL and return the extracted
-            content from all discovered pages as JSON. Use this to explore a
-            website's content, e.g. "crawl https://docs.laravel.com".
-            TXT;
+        return 'Crawl a website starting from a base URL to discover and extract '
+            .'content from multiple pages. Intelligently traverses links and '
+            .'extracts structured data at scale.';
     }
 
     public function schema(JsonSchema $schema): array
@@ -29,32 +26,38 @@ class TavilyCrawl implements Tool
         return [
             'url' => $schema
                 ->string()
-                ->description('The root URL to begin the crawl from.')
+                ->description('The base URL to start crawling from')
                 ->required(),
             'instructions' => $schema
                 ->string()
-                ->description('Optional natural language instructions for the crawler.')
-                ->nullable(),
+                ->description("Optional instructions to guide the crawler (e.g., 'only crawl blog posts', 'focus on product pages')")
+                ->nullable()
+                ->required(),
             'max_depth' => $schema
                 ->integer()
-                ->description('Maximum crawl depth (1-5). Defaults to 1.')
-                ->nullable(),
+                ->description('Maximum depth to crawl (number of link hops from the base URL, 1-5, default: 1)')
+                ->nullable()
+                ->required(),
             'max_breadth' => $schema
                 ->integer()
-                ->description('Maximum links to follow per page (1-500). Defaults to 20.')
-                ->nullable(),
+                ->description('Maximum number of links to follow per page (1-500, default: 20)')
+                ->nullable()
+                ->required(),
             'limit' => $schema
                 ->integer()
-                ->description('Total number of links to process before stopping. Defaults to 50.')
-                ->nullable(),
+                ->description('Total number of links to process before stopping (default: 50)')
+                ->nullable()
+                ->required(),
             'extract_depth' => $schema
                 ->string()
-                ->description('Extraction depth: "basic" or "advanced". Defaults to "basic".')
-                ->nullable(),
+                ->description("Extraction depth for page content - 'basic' or 'advanced' (default: 'basic')")
+                ->nullable()
+                ->required(),
             'allow_external' => $schema
                 ->boolean()
-                ->description('Whether to include external domain links. Defaults to true.')
-                ->nullable(),
+                ->description('Whether to allow crawling external domains (default: false)')
+                ->nullable()
+                ->required(),
         ];
     }
 

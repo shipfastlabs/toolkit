@@ -1,14 +1,8 @@
-# shipfastlabs/toolkit-tavily
-
-[![Latest Version](https://img.shields.io/packagist/v/shipfastlabs/toolkit-tavily.svg)](https://packagist.org/packages/shipfastlabs/toolkit-tavily)
-[![Total Downloads](https://img.shields.io/packagist/dt/shipfastlabs/toolkit-tavily.svg)](https://packagist.org/packages/shipfastlabs/toolkit-tavily)
+# Tavily
 
 > Tavily tools for the Laravel AI SDK - Search, Extract, Crawl, and Map
 
 Part of the [shipfastlabs/toolkit](https://github.com/shipfastlabs/toolkit) catalog of reusable AI tools for the Laravel AI SDK.
-
-<!-- AUTO-GENERATED: do not edit above this line. Run `tools/docgen.sh`. -->
-
 
 ## Installation
 

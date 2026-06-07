@@ -16,13 +16,9 @@ class TavilySearch implements Tool
 {
     public function description(): string
     {
-        return <<<'TXT'
-            Tavily Search - Real-time web search optimized for AI applications.
-            Search the web for real-time information and return the results as JSON.
-            Use this whenever you need current data, facts, news, or information
-            that may not be in your training data, e.g. "what is the weather in Paris"
-            or "latest news about Laravel".
-            TXT;
+        return "Search the web for real-time information using Tavily's AI-optimized "
+            .'search engine. Returns relevant sources, snippets, and optional '
+            .'AI-generated answers.';
     }
 
     public function schema(JsonSchema $schema): array
@@ -30,20 +26,23 @@ class TavilySearch implements Tool
         return [
             'query' => $schema
                 ->string()
-                ->description('The search query to look up on the web.')
+                ->description('The search query to look up on the web')
                 ->required(),
             'max_results' => $schema
                 ->integer()
-                ->description('Maximum number of search results to return (1-10). Defaults to 5.')
-                ->nullable(),
+                ->description('Maximum number of search results to return (1-10, default: 5)')
+                ->nullable()
+                ->required(),
             'search_depth' => $schema
                 ->string()
-                ->description('Search depth: "basic" for fast results or "advanced" for more comprehensive results. Defaults to "basic".')
-                ->nullable(),
+                ->description("The depth of the search - 'basic' for quick results, 'advanced' for comprehensive search (default: 'basic')")
+                ->nullable()
+                ->required(),
             'include_answer' => $schema
                 ->boolean()
-                ->description('Whether to include a concise generated answer summarizing the results. Defaults to false.')
-                ->nullable(),
+                ->description('Whether to include an AI-generated answer summarizing the results (default: false)')
+                ->nullable()
+                ->required(),
         ];
     }
 

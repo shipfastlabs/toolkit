@@ -5,6 +5,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
         "laravel/ai": "^0.7"
     },
     "autoload": {
