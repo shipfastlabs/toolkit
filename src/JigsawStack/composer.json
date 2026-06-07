@@ -1,0 +1,24 @@
+{
+    "name": "shipfastlabs/toolkit-jigsawstack",
+    "description": "JigsawStack tools for the Laravel AI SDK - sentiment, summary, embedding, translation, web search, scraping, vision, audio, and validation",
+    "keywords": ["laravel", "ai", "tool", "jigsawstack", "sentiment", "summary", "embedding", "translate", "web-search", "scrape", "ocr", "speech-to-text"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\JigsawStack\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\JigsawStack\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
