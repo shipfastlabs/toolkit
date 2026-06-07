@@ -1,0 +1,24 @@
+{
+    "name": "shipfastlabs/toolkit-tavily",
+    "description": "Tavily tools for the Laravel AI SDK - Search, Extract, Crawl, and Map",
+    "keywords": ["laravel", "ai", "tool", "tavily", "search", "extract", "crawl", "map"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Tavily\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Tavily\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
