@@ -1,0 +1,24 @@
+{
+    "name": "shipfastlabs/toolkit-perplexity",
+    "description": "Perplexity tools for the Laravel AI SDK - Search and Ask (Sonar)",
+    "keywords": ["laravel", "ai", "tool", "perplexity", "sonar", "search", "answer"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "laravel/ai": "^0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Perplexity\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Perplexity\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
