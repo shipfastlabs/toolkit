@@ -33,6 +33,7 @@
     "replace": {
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
+        "shipfastlabs/toolkit-exa": "self.version",
         "shipfastlabs/toolkit-stub": "self.version",
         "shipfastlabs/toolkit-tavily": "self.version"
     },
@@ -43,6 +44,7 @@
             "Shipfastlabs\\Toolkit\\": "src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
             "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
+            "Shipfastlabs\\Toolkit\\Exa\\": "src/Exa/src/",
             "Shipfastlabs\\Toolkit\\Tavily\\": "src/Tavily/src/"
         }
     },
@@ -50,6 +52,7 @@
         "psr-4": {
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
+            "Shipfastlabs\\Toolkit\\Exa\\Tests\\": "src/Exa/tests/",
             "Shipfastlabs\\Toolkit\\Tavily\\Tests\\": "src/Tavily/tests/",
             "Shipfastlabs\\Toolkit\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/",
