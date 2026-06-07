@@ -12,3 +12,4 @@
 *.swo
 .deepsec/
 docs/node_modules/
+.claude
