@@ -20,6 +20,7 @@ class WorkbenchServiceProvider extends ServiceProvider
 
         config([
             'services.tavily.key' => env('TAVILY_API_KEY'),
+            'services.jigsawstack.key' => env('JIGSAWSTACK_API_KEY'),
             'ai.providers.openai.key' => env('OPENAI_API_KEY'),
         ]);
     }

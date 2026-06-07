@@ -10,6 +10,7 @@ use Laravel\Ai\Contracts\Tool;
 use Laravel\Ai\Promptable;
 use Shipfastlabs\Toolkit\Calculator\CalculatorTool;
 use Shipfastlabs\Toolkit\Database\DatabaseQueryTool;
+use Shipfastlabs\Toolkit\JigsawStack\JigsawStack;
 use Shipfastlabs\Toolkit\Tavily\Tavily;
 
 /**
@@ -37,6 +38,7 @@ class ToolkitAgent implements Agent, HasTools
             new CalculatorTool,
             new DatabaseQueryTool,
             ...Tavily::all(),
+            ...JigsawStack::all(),
         ];
     }
 }
