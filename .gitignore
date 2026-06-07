@@ -13,3 +13,6 @@
 .deepsec/
 docs/node_modules/
 .claude
+
+# Testbench workbench build artifact (machine-specific symlink)
+/workbench/storage

@@ -11,6 +11,7 @@ use Laravel\Ai\Promptable;
 use Shipfastlabs\Toolkit\Calculator\CalculatorTool;
 use Shipfastlabs\Toolkit\Database\DatabaseQueryTool;
 use Shipfastlabs\Toolkit\Exa\Exa;
+use Shipfastlabs\Toolkit\JigsawStack\JigsawStack;
 use Shipfastlabs\Toolkit\Perplexity\Perplexity;
 use Shipfastlabs\Toolkit\Tavily\Tavily;
 
@@ -40,6 +41,7 @@ class ToolkitAgent implements Agent, HasTools
             new DatabaseQueryTool,
             ...Tavily::all(),
             ...Exa::all(),
+            ...JigsawStack::all(),
             ...Perplexity::all(),
         ];
     }
