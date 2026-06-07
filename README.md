@@ -23,6 +23,8 @@ Toolkit is a community catalog of reusable AI tools for the [Laravel AI SDK](htt
 | `TavilyExtract` | Extract clean, structured content from URLs. |
 | `TavilyCrawl` | Intelligently crawl a website and extract content. |
 | `TavilyMap` | Discover and map a website's structure. |
+| `PerplexitySearch` | Search the web for real-time information using [Perplexity](https://perplexity.ai). |
+| `PerplexityAsk` | Ask a question and get a direct, cited answer from Perplexity's Sonar models. |
 
 ## Official Documentation
 

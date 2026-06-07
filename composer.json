@@ -34,6 +34,7 @@
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
         "shipfastlabs/toolkit-exa": "self.version",
+        "shipfastlabs/toolkit-perplexity": "self.version",
         "shipfastlabs/toolkit-stub": "self.version",
         "shipfastlabs/toolkit-tavily": "self.version"
     },
@@ -45,6 +46,7 @@
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
             "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
             "Shipfastlabs\\Toolkit\\Exa\\": "src/Exa/src/",
+            "Shipfastlabs\\Toolkit\\Perplexity\\": "src/Perplexity/src/",
             "Shipfastlabs\\Toolkit\\Tavily\\": "src/Tavily/src/"
         }
     },
@@ -53,6 +55,7 @@
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
             "Shipfastlabs\\Toolkit\\Exa\\Tests\\": "src/Exa/tests/",
+            "Shipfastlabs\\Toolkit\\Perplexity\\Tests\\": "src/Perplexity/tests/",
             "Shipfastlabs\\Toolkit\\Tavily\\Tests\\": "src/Tavily/tests/",
             "Shipfastlabs\\Toolkit\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/",
