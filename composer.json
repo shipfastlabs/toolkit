@@ -31,6 +31,7 @@
         "symfony/var-dumper": "^8.0.8"
     },
     "replace": {
+        "shipfastlabs/toolkit-brave": "self.version",
         "shipfastlabs/toolkit-calculator": "self.version",
         "shipfastlabs/toolkit-database": "self.version",
         "shipfastlabs/toolkit-exa": "self.version",
@@ -44,6 +45,7 @@
     "autoload": {
         "psr-4": {
             "Shipfastlabs\\Toolkit\\": "src/",
+            "Shipfastlabs\\Toolkit\\Brave\\": "src/Brave/src/",
             "Shipfastlabs\\Toolkit\\Calculator\\": "src/Calculator/src/",
             "Shipfastlabs\\Toolkit\\Database\\": "src/Database/src/",
             "Shipfastlabs\\Toolkit\\Exa\\": "src/Exa/src/",
@@ -54,6 +56,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Shipfastlabs\\Toolkit\\Brave\\Tests\\": "src/Brave/tests/",
             "Shipfastlabs\\Toolkit\\Calculator\\Tests\\": "src/Calculator/tests/",
             "Shipfastlabs\\Toolkit\\Database\\Tests\\": "src/Database/tests/",
             "Shipfastlabs\\Toolkit\\Exa\\Tests\\": "src/Exa/tests/",
