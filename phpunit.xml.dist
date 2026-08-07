@@ -7,8 +7,10 @@
         <include>
             <directory suffix=".php">./src/Brave/src</directory>
             <directory suffix=".php">./src/Calculator/src</directory>
+            <directory suffix=".php">./src/Citations/src</directory>
             <directory suffix=".php">./src/Database/src</directory>
             <directory suffix=".php">./src/JigsawStack/src</directory>
+            <directory suffix=".php">./src/Scout/src</directory>
         </include>
     </source>
     <testsuites>
