@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Shipfastlabs\Toolkit\Scout\Tests\Fixtures;
+
+use Illuminate\Database\Eloquent\Model;
+
+class InvalidBuilderSearchableModel extends Model
+{
+    public static function search(string $query): string
+    {
+        return 'not-a-builder';
+    }
+}
