@@ -1,0 +1,24 @@
+{
+    "name": "shipfastlabs/toolkit-brave",
+    "description": "Brave Search tools for the Laravel AI SDK - Web Search",
+    "keywords": ["laravel", "ai", "tool", "brave", "search", "web"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "laravel/ai": "^0.7|^0.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Brave\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Brave\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
