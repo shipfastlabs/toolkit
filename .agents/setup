@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+if [[ -z "${HOME:-}" ]]; then
+    HOME="$(getent passwd "$(id -u)" | cut -d: -f6)"
+    export HOME
+fi
+
+export COMPOSER_HOME="${COMPOSER_HOME:-$HOME/.cache/composer}"
+mkdir -p "$COMPOSER_HOME" "$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
+
+profile_marker="# shipfastlabs/toolkit orb toolchain"
+if ! grep -Fqx "$profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+    cat >> "$HOME/.bash_profile" <<EOF
+
+$profile_marker
+export PATH="$HOME/.local/bin:$HOME/.bun/bin:\$PATH"
+EOF
+fi
+
+step() {
+    local label="$1"
+    shift
+
+    echo "==> $label"
+    time "$@"
+}
+
+install_debian_toolchain() {
+    local php_packages=(
+        php8.4-cli
+        php8.4-curl
+        php8.4-mbstring
+        php8.4-pcov
+        php8.4-sqlite3
+        php8.4-xml
+        php8.4-zip
+    )
+    local packages=(ca-certificates curl gh git jq unzip)
+    local package
+    local missing=()
+
+    for package in "${packages[@]}"; do
+        dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -Fq 'install ok installed' || missing+=("$package")
+    done
+
+    if (( ${#missing[@]} )); then
+        apt-get update
+        apt-get install -y "${missing[@]}"
+    fi
+
+    if ! command -v php >/dev/null 2>&1 \
+        || ! php -r 'exit(version_compare(PHP_VERSION, "8.4.0", ">=") ? 0 : 1);' \
+        || ! php -r 'foreach (["curl", "dom", "mbstring", "pdo_sqlite", "zip", "pcov"] as $extension) { if (!extension_loaded($extension)) exit(1); }'; then
+        if [[ ! -f /etc/apt/sources.list.d/php.list ]]; then
+            apt-get update
+            apt-get install -y ca-certificates curl gnupg
+            curl -fsSL https://packages.sury.org/php/apt.gpg \
+                | gpg --dearmor --yes -o /usr/share/keyrings/deb.sury.org-php.gpg
+            echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ bookworm main" \
+                > /etc/apt/sources.list.d/php.list
+        fi
+
+        apt-get update
+        apt-get install -y "${php_packages[@]}"
+        update-alternatives --set php /usr/bin/php8.4
+    fi
+}
+
+# Amp orbs use Debian 12. Avoid changing unrelated developer machines while
+# still exercising the dependency steps when this script is tested elsewhere.
+if [[ -r /etc/os-release ]]; then
+    # shellcheck disable=SC1091
+    source /etc/os-release
+    if [[ "${ID:-}" == "debian" && "${VERSION_ID:-}" == "12" ]]; then
+        step "Install Debian toolchain" install_debian_toolchain
+    fi
+fi
+
+if ! command -v php >/dev/null 2>&1 \
+    || ! php -r 'exit(version_compare(PHP_VERSION, "8.4.0", ">=") ? 0 : 1);'; then
+    echo "PHP 8.4 or newer is required." >&2
+    exit 1
+fi
+
+if ! command -v composer >/dev/null 2>&1; then
+    step "Install Composer" bash -c '
+        installer="$(mktemp)"
+        trap '\''rm -f "$installer"'\'' EXIT
+        curl -fsSL https://getcomposer.org/installer -o "$installer"
+        expected="$(curl -fsSL https://composer.github.io/installer.sig)"
+        actual="$(php -r '\''echo hash_file("sha384", $argv[1]);'\'' "$installer")"
+        [[ "$actual" == "$expected" ]]
+        php "$installer" --quiet --install-dir="$HOME/.local/bin" --filename=composer
+    '
+fi
+
+if ! command -v bun >/dev/null 2>&1; then
+    step "Install Bun 1.4.2" bash -c 'curl -fsSL https://bun.sh/install | bash -s "bun-v1.4.2"'
+fi
+
+[[ -f .env ]] || cp -- .env.example .env
+
+# composer.lock is intentionally untracked in this library, and CI resolves
+# dependencies afresh with composer update as well.
+step "Install PHP dependencies" composer update --no-interaction --prefer-dist
+step "Install documentation dependencies" bun install --cwd docs --frozen-lockfile
+
+echo "Orb setup complete."

@@ -13,6 +13,7 @@
 .deepsec/
 docs/node_modules/
 .claude
+/.amp/portals/*
 
 # Testbench workbench build artifact (machine-specific symlink)
 /workbench/storage
