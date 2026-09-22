@@ -1,0 +1,25 @@
+{
+    "name": "shipfastlabs/toolkit-scout",
+    "description": "Laravel Scout search tools for the Laravel AI SDK",
+    "keywords": ["laravel", "ai", "tool", "scout", "search"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
+        "laravel/ai": "^0.7|^0.10",
+        "laravel/scout": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Scout\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shipfastlabs\\Toolkit\\Scout\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
